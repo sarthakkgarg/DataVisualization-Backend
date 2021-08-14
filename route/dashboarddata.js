@@ -42,12 +42,19 @@ router.post("/Dashboard", async (req, res) => {
         type,
         startYear,
         endYear,
-        country
+        country,
+        filterKey
     } = req.body;
 
     if(type==="intensity"){
         let result = await data.find({});
         res.json({ data: result })
+        return
+    }
+    if(type==="country"){
+        let result = await data.find({country:filterKey});
+        res.json({ data: result })
+        return
     }
     else {
         if (limit === 0) {
